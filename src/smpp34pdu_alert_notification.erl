@@ -7,8 +7,10 @@
 -import(pdu_data, [cstring_to_bin/2, integer_to_bin/2]).
 -import(pdu_data, [bin_to_cstring/2, bin_to_integer/2]).
 
--spec(pack/1 :: (alert_notification()) -> binary()).
--spec(unpack/1 :: (binary()) -> alert_notification()).
+
+
+-spec pack(alert_notification()) -> binary().
+-spec unpack(binary()) -> alert_notification().
 
 pack(#alert_notification{source_addr_ton=SrcAddrTon,
 		source_addr_npi=SrcAddrNpi,
