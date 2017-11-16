@@ -5,8 +5,9 @@
 -import(pdu_data, [cstring_to_bin/2, integer_to_bin/2]).
 -import(pdu_data, [bin_to_cstring/2, bin_to_integer/2]).
 
--spec(pack/1 :: (cancel_sm()) -> binary()).
--spec(unpack/1 :: (binary()) -> cancel_sm()).
+
+-spec pack(cancel_sm()) -> binary().
+-spec unpack(binary()) -> cancel_sm().
 
 pack(#cancel_sm{service_type=ServiceType,
 		message_id=MessageId, 
