@@ -6,9 +6,10 @@
 -import(pdu_data, [cstring_to_bin/2]).
 -import(pdu_data, [bin_to_cstring/2]).
 
--spec(pack/1 :: (bind_transceiver_resp()) -> binary()).
--spec(unpack/1 :: (binary()) -> bind_transceiver_resp()).
--spec(unpack_tlv_fields/2 :: (binary(), bind_transceiver_resp()) -> bind_transceiver_resp()).
+
+-spec pack(bind_transceiver_resp()) -> binary().
+-spec unpack(binary()) -> bind_transceiver_resp().
+-spec unpack_tlv_fields(binary(), bind_transceiver_resp()) -> bind_transceiver_resp().
 
 pack(#bind_transceiver_resp{system_id=SystemId, 
 		sc_interface_version=ScIntVersion}) ->
