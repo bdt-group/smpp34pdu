@@ -5,8 +5,9 @@
 -import(pdu_data, [cstring_to_bin/2, integer_to_bin/2]).
 -import(pdu_data, [bin_to_cstring/2, bin_to_integer/2]).
 
--spec(pack/1 :: (query_sm_resp()) -> binary()).
--spec(unpack/1 :: (binary()) -> query_sm_resp()).
+
+-spec pack(query_sm_resp()) -> binary().
+-spec unpack(binary()) -> query_sm_resp().
 
 pack(#query_sm_resp{message_id=MessageId, 
 		final_date=FinalDate,
