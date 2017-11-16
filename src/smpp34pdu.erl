@@ -5,13 +5,13 @@
 
 -type(unpack_status() :: 'header_length' | 'body_length' | 'ok').
 
--spec(pack/3 :: (integer(), integer(), valid_pdu()) -> binary()).
--spec(pack/4 :: (integer(), integer(), integer(), binary()) -> binary()).
+-spec pack(integer(), integer(), valid_pdu()) -> binary().
+-spec pack(integer(), integer(), integer(), binary()) -> binary().
 
--spec(unpack/1 :: (binary()) -> {unpack_status(), [pdu()],binary()}).
--spec(unpack/3 :: (binary(), unpack_status(), [pdu()]) -> {unpack_status(), [pdu()], binary()}).
+-spec unpack(binary()) -> {unpack_status(), [pdu()],binary()}.
+-spec unpack(binary(), unpack_status(), [pdu()]) -> {unpack_status(), [pdu()], binary()}.
 
--spec(unpack_body/2 :: (integer(), binary()) -> valid_pdu() | invalid_command_id()).
+-spec unpack_body(integer(), binary()) -> valid_pdu() | invalid_command_id().
 
 pack(CmdStat, Snum, #generic_nack{}) ->
 	pack(?GENERIC_NACK, CmdStat, Snum, <<>>);
