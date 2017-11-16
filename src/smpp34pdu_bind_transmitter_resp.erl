@@ -8,7 +8,7 @@
 
 -spec pack(bind_transmitter_resp()) -> binary().
 -spec unpack(binary()) -> bind_transmitter_resp().
--spec unpack_tlv_fields(binary(), bind_transmitter_resp) -> bind_transmitter_resp().
+-spec unpack_tlv_fields(binary(), bind_transmitter_resp()) -> bind_transmitter_resp().
 
 pack(#bind_transmitter_resp{system_id=SystemId, 
 		sc_interface_version=ScIntVersion}) ->
