@@ -129,6 +129,8 @@
 -define(ITS_REPLY_TYPE, 16#1308).
 -define(ITS_SESSION_INFO, 16#1383).
 -define(USSD_SERVICE_OP, 16#0501).
+-define(USSD_SESSION_ID, 16#1501).
+-define(IMSI, 16#1502).
 
 % Library defined SMPP type defaults (convenience)
 

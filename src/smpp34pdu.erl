@@ -1,6 +1,6 @@
 -module(smpp34pdu).
 -include("smpp34pdu.hrl").
--include("types.hrl").
+-include("smpp34pdu_types.hrl").
 -export([pack/3, unpack/1]).
 
 -type(unpack_status() :: 'header_length' | 'body_length' | 'ok').

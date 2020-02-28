@@ -1,7 +1,7 @@
 -module(smpp34pdu_bind_receiver_resp).
 -include("smpp34pdu.hrl").
--include("types.hrl").
--include("tlv_macros.hrl").
+-include("smpp34pdu_types.hrl").
+-include("smpp34pdu_tlv_macros.hrl").
 -export([pack/1,unpack/1]).
 -import(pdu_data, [cstring_to_bin/2]).
 -import(pdu_data, [bin_to_cstring/2]).
