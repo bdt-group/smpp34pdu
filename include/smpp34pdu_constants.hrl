@@ -358,5 +358,6 @@
 -define(USSD_PSSR_RESPONSE, 17).
 -define(USSD_USSR_CONFIRM, 18).
 -define(USSD_USSN_CONFIRM, 19).
+-define(USSD_USSREL_INDICATION, 129).
 
 -endif.
