@@ -314,7 +314,11 @@ unpack(?USSD_SESSION_ID=T, Bin) ->
     unpack_int(T, Bin);
 
 unpack(?IMSI=T, Bin) ->
-    unpack_cstring(T, Bin).
+    unpack_cstring(T, Bin);
+
+unpack(Tag, Bin) ->
+    discard_tag(Tag, Bin).
+
 
 pack_multi(_, undefined) ->
     <<>>;
@@ -400,3 +404,6 @@ unpack_cstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
 
 unpack_octstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
     pdu_data:bin_to_octstring(Val, Len).
+
+discard_tag(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
+    {undefined, binary:part(Val, Len, byte_size(Val) - Len)}.
