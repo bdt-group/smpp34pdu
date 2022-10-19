@@ -13,3 +13,4 @@ ebin
 .eunit
 *~
 .*.swp
+_build

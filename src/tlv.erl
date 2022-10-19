@@ -25,9 +25,9 @@
 -spec pack_octstring_fixedlen(integer(), binary(), integer()) -> binary().
 -spec pack_octstring_varlen(integer(), binary(), {integer(), integer()}) -> binary().
 -spec pack_octstring_nomax(integer(), binary()) -> binary().
--spec unpack_int(integer(), binary()) -> integer().
--spec unpack_cstring(integer(), binary()) -> iolist().
--spec unpack_octstring(integer(), binary()) -> binary().
+-spec unpack_int(integer(), binary()) -> {integer(), binary()}.
+-spec unpack_cstring(integer(), binary()) -> {iolist(), binary()}.
+-spec unpack_octstring(integer(), binary()) -> {binary(), binary()}.
 
 pack(_, undefined) ->
     <<>>;
@@ -314,7 +314,11 @@ unpack(?USSD_SESSION_ID=T, Bin) ->
     unpack_int(T, Bin);
 
 unpack(?IMSI=T, Bin) ->
-    unpack_cstring(T, Bin).
+    unpack_cstring(T, Bin);
+
+unpack(Tag, Bin) ->
+    discard_tag(Tag, Bin).
+
 
 pack_multi(_, undefined) ->
     <<>>;
@@ -400,3 +404,7 @@ unpack_cstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
 
 unpack_octstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
     pdu_data:bin_to_octstring(Val, Len).
+
+discard_tag(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
+    <<_:Len/unit:8, Rest/binary>> = Val,
+    {undefined, Rest}.
