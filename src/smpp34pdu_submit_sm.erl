@@ -55,8 +55,8 @@ pack(#submit_sm{service_type=SrvType,
 		its_reply_type=ItsReplyType,
 		its_session_info=ItsSessionInfo,
 		ussd_service_op=UssdServiceOp,
-        ussd_session_id=UssdSessionId,
-        vendor_specific = VendorSpecific}) ->
+		ussd_session_id=UssdSessionId,
+		vendor_specific = VendorSpecific}) ->
 
     SmLen = length(ShortMessage),
 
