@@ -1,6 +1,6 @@
 -module(tlv).
 -include("smpp34pdu_constants.hrl").
--export([pack/2, unpack/2]).
+-export([pack/1, pack/2, unpack/2]).
 -export([pack_multi/2, unpack_multi/2]).
 -export([pack_noval/1, pack_int/3, pack_cstring/3,
          pack_octstring_fixedlen/3, pack_octstring_varlen/3,
@@ -28,6 +28,17 @@
 -spec unpack_int(integer(), binary()) -> {integer(), binary()}.
 -spec unpack_cstring(integer(), binary()) -> {iolist(), binary()}.
 -spec unpack_octstring(integer(), binary()) -> {binary(), binary()}.
+
+pack(undefined) ->
+    <<>>;
+pack(TLVVendorSpecific) when is_map(TLVVendorSpecific) ->
+    maps:fold(
+        fun(Tag, V, Acc) ->
+            <<Acc/binary, Tag:?TLV_TAG_SIZE, (size(V)):?TLV_LEN_SIZE, V/binary>>
+        end,
+        <<>>,
+        TLVVendorSpecific
+    ).
 
 pack(_, undefined) ->
     <<>>;
@@ -317,7 +328,7 @@ unpack(?IMSI=T, Bin) ->
     unpack_cstring(T, Bin);
 
 unpack(Tag, Bin) ->
-    discard_tag(Tag, Bin).
+    unpack_raw(Tag, Bin).
 
 
 pack_multi(_, undefined) ->
@@ -405,6 +416,6 @@ unpack_cstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
 unpack_octstring(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
     pdu_data:bin_to_octstring(Val, Len).
 
-discard_tag(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
-    <<_:Len/unit:8, Rest/binary>> = Val,
-    {undefined, Rest}.
+unpack_raw(Tag, <<Tag:?TLV_TAG_SIZE, Len:?TLV_LEN_SIZE, Val/binary>>) ->
+    <<Value:Len/binary, Rest/binary>> = Val,
+    {Value, Rest}.

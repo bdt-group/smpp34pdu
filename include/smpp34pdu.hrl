@@ -93,7 +93,8 @@
                     its_reply_type,
                     its_session_info,
                     ussd_service_op,
-                    ussd_session_id
+                    ussd_session_id,
+                    vendor_specific = #{}
                    }).
 
 -record(submit_sm_resp, {message_id=?DEFAULT_CSTRING, ussd_session_id}).
