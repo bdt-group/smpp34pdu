@@ -203,9 +203,9 @@ submit_sm_custom_tlv_packing_test_() ->
 		sm_length=11,
 		short_message="hello world",
 		source_port=11,
-        vendor_specific = #{
+		vendor_specific = #{
             16#3FFF => <<254, 253>>
-        }
+		}
     },
 
 	Bin = <<67,77,84,0,
