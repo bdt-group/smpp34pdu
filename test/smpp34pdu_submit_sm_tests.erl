@@ -159,9 +159,9 @@ submit_sm_custom_tlv_unpacking_test_() ->
 		sm_length=11,
 		short_message="hello world",
 		source_port=11,
-        vendor_specific = #{
-            2 => <<254, 253>>
-        }
+		vendor_specific = #{
+			2 => <<254, 253>>
+		}
     },
 
 	Bin = <<67,77,84,0,
@@ -175,8 +175,8 @@ submit_sm_custom_tlv_unpacking_test_() ->
 			1,1,1,1,11,
 			104,101,108,108,111,32,119,111,114,108,100,
 			2,10,0,2,0,11,
-            16#3F, 16#FF,0,2,254,253,
-            16#40, 16#00,0,2,254,253>>,
+			16#3F, 16#FF,0,2,254,253,
+			16#40, 16#00,0,2,254,253>>,
 
 	[
 		{"Unpacking Bin with custom TLV will give PayLoad with custom vendor-specific TLV",
@@ -204,7 +204,7 @@ submit_sm_custom_tlv_packing_test_() ->
 		short_message="hello world",
 		source_port=11,
 		vendor_specific = #{
-            16#3FFF => <<254, 253>>
+			16#3FFF => <<254, 253>>
 		}
     },
 
@@ -219,7 +219,7 @@ submit_sm_custom_tlv_packing_test_() ->
 			1,1,1,1,11,
 			104,101,108,108,111,32,119,111,114,108,100,
 			2,10,0,2,0,11,
-            16#3F, 16#FF,0,2,254,253>>,
+			16#3F, 16#FF,0,2,254,253>>,
 
 	[
 		{"Packing with custom TLV will honor custom TLVs",
