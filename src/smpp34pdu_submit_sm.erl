@@ -55,8 +55,8 @@ pack(#submit_sm{service_type=SrvType,
 		its_reply_type=ItsReplyType,
 		its_session_info=ItsSessionInfo,
 		ussd_service_op=UssdServiceOp,
-                ussd_session_id=UssdSessionId,
-        vendor_specific = VendorSpecific }) ->
+        ussd_session_id=UssdSessionId,
+        vendor_specific = VendorSpecific}) ->
 
     SmLen = length(ShortMessage),
 
@@ -182,4 +182,5 @@ unpack(Bin0) ->
 ?TLV_UNPACK_FIELD(submit_sm, its_session_info, ?ITS_SESSION_INFO);
 ?TLV_UNPACK_FIELD(submit_sm, ussd_service_op, ?USSD_SERVICE_OP);
 ?TLV_UNPACK_FIELD(submit_sm, ussd_session_id, ?USSD_SESSION_ID);
-?TLV_UNPACK_UNEXPECTED(submit_sm).
+?TLV_UNPACK_VENDOR_SPECIFIC(submit_sm);
+?TLV_UNPACK_UNEXPECTED().

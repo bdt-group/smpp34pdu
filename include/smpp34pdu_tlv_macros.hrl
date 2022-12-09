@@ -5,7 +5,7 @@
 -define(TLV_UNPACK_UNEXPECTED(), unpack_tlv_fields(<<Unexpected:?TLV_TAG_SIZE, _/binary>>=Bin, Body) ->
     {_, Rest} = tlv:unpack(Unexpected, Bin),
     unpack_tlv_fields(Rest, Body)).
--define(TLV_UNPACK_UNEXPECTED(RECORD_NAME), unpack_tlv_fields(<<Unexpected:?TLV_TAG_SIZE, _/binary>>=Bin, Body) ->
+-define(TLV_UNPACK_VENDOR_SPECIFIC(RECORD_NAME), unpack_tlv_fields(<<Unexpected:?TLV_TAG_SIZE, _/binary>>=Bin, Body) when (Unexpected >= 16#1400) and (Unexpected =< 16#3FFF) ->
     case tlv:unpack(Unexpected, Bin) of
         {<<>>, Rest} -> unpack_tlv_fields(Rest, Body);
         {Val, Rest} ->
