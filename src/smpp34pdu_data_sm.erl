@@ -60,8 +60,8 @@ pack(#data_sm{service_type=SrvType,
 		language_indicator=LanguageIndicator,
 		its_reply_type=ItsReplyType,
 		its_session_info=ItsSessionInfo,
-        ussd_service_op=UssdServiceOp,
-        ussd_session_id=UssdSessionId}) ->
+		ussd_service_op=UssdServiceOp,
+		ussd_session_id=UssdSessionId}) ->
 
 		L = [cstring_to_bin(SrvType, 6),
 					integer_to_bin(SrcAddrTon, 1),
@@ -111,8 +111,8 @@ pack(#data_sm{service_type=SrvType,
 					tlv:pack(?LANGUAGE_INDICATOR, LanguageIndicator),
 					tlv:pack(?ITS_REPLY_TYPE, ItsReplyType),
 					tlv:pack(?ITS_SESSION_INFO, ItsSessionInfo),
-                    tlv:pack(?USSD_SERVICE_OP, UssdServiceOp),
-                    tlv:pack(?USSD_SESSION_ID, UssdSessionId)],
+					tlv:pack(?USSD_SERVICE_OP, UssdServiceOp),
+					tlv:pack(?USSD_SESSION_ID, UssdSessionId)],
 
 		list_to_binary(L).
 
