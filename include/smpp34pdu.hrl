@@ -197,7 +197,9 @@
                   alert_on_message_delivery,
                   language_indicator,
                   its_reply_type,
-                  its_session_info}).
+                  its_session_info,
+                  ussd_service_op,
+                  ussd_session_id}).
 
 
 -record(data_sm_resp, {message_id=?DEFAULT_CSTRING,

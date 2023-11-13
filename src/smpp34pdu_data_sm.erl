@@ -59,7 +59,9 @@ pack(#data_sm{service_type=SrvType,
 		alert_on_message_delivery=AlertOnMsgDelivery,
 		language_indicator=LanguageIndicator,
 		its_reply_type=ItsReplyType,
-		its_session_info=ItsSessionInfo}) ->
+		its_session_info=ItsSessionInfo,
+		ussd_service_op=UssdServiceOp,
+		ussd_session_id=UssdSessionId}) ->
 
 		L = [cstring_to_bin(SrvType, 6),
 					integer_to_bin(SrcAddrTon, 1),
@@ -108,7 +110,9 @@ pack(#data_sm{service_type=SrvType,
 					tlv:pack(?ALERT_ON_MESSAGE_DELIVERY, AlertOnMsgDelivery),
 					tlv:pack(?LANGUAGE_INDICATOR, LanguageIndicator),
 					tlv:pack(?ITS_REPLY_TYPE, ItsReplyType),
-					tlv:pack(?ITS_SESSION_INFO, ItsSessionInfo)],
+					tlv:pack(?ITS_SESSION_INFO, ItsSessionInfo),
+					tlv:pack(?USSD_SERVICE_OP, UssdServiceOp),
+					tlv:pack(?USSD_SESSION_ID, UssdSessionId)],
 
 		list_to_binary(L).
 
@@ -174,4 +178,6 @@ unpack(Bin0) ->
 ?TLV_UNPACK_FIELD(data_sm, language_indicator, ?LANGUAGE_INDICATOR);
 ?TLV_UNPACK_FIELD(data_sm, its_reply_type, ?ITS_REPLY_TYPE);
 ?TLV_UNPACK_FIELD(data_sm, its_session_info, ?ITS_SESSION_INFO);
+?TLV_UNPACK_FIELD(data_sm, ussd_service_op, ?USSD_SERVICE_OP);
+?TLV_UNPACK_FIELD(data_sm, ussd_session_id, ?USSD_SESSION_ID);
 ?TLV_UNPACK_UNEXPECTED().
