@@ -11,25 +11,25 @@
 -spec unpack(binary()) -> data_sm_resp().
 
 pack(#data_sm_resp{message_id=MessageId,
-		delivery_failure_reason=DeliveryFailureReason,
-		network_error_code=NetworkErrorCode,
-		additional_status_info_text=AdditionalStatusInfoText,
-		dpf_result=DpfResult}) ->
+        delivery_failure_reason=DeliveryFailureReason,
+        network_error_code=NetworkErrorCode,
+        additional_status_info_text=AdditionalStatusInfoText,
+        dpf_result=DpfResult}) ->
 
 
-		L = [cstring_to_bin(MessageId, 65),
-					   tlv:pack(?DELIVERY_FAILURE_REASON, DeliveryFailureReason),
-					   tlv:pack(?NETWORK_ERROR_CODE, NetworkErrorCode),
-					   tlv:pack(?ADDITIONAL_STATUS_INFO_TEXT, AdditionalStatusInfoText),
-					   tlv:pack(?DPF_RESULT, DpfResult)],
+        L = [cstring_to_bin(MessageId, 65),
+                       tlv:pack(?DELIVERY_FAILURE_REASON, DeliveryFailureReason),
+                       tlv:pack(?NETWORK_ERROR_CODE, NetworkErrorCode),
+                       tlv:pack(?ADDITIONAL_STATUS_INFO_TEXT, AdditionalStatusInfoText),
+                       tlv:pack(?DPF_RESULT, DpfResult)],
 
-		list_to_binary(L).
+        list_to_binary(L).
 
 
 unpack(Bin0) ->
-	{MessageId, Bin1} = bin_to_cstring(Bin0, 65),
+    {MessageId, Bin1} = bin_to_cstring(Bin0, 65),
 
-	unpack_tlv_fields(Bin1, #data_sm_resp {message_id=MessageId}).
+    unpack_tlv_fields(Bin1, #data_sm_resp {message_id=MessageId}).
 
 ?TLV_UNPACK_EMPTY_BIN();
 ?TLV_UNPACK_FIELD(data_sm_resp, delivery_failure_reason, ?DELIVERY_FAILURE_REASON);

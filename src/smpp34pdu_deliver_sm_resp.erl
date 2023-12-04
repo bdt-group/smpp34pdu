@@ -10,11 +10,11 @@
 
 
 pack(#deliver_sm_resp{message_id=MessageId}) ->
-		L = [cstring_to_bin(MessageId, 65)],
-		list_to_binary(L).
+        L = [cstring_to_bin(MessageId, 65)],
+        list_to_binary(L).
 
 
 unpack(Bin0) ->
-	{MessageId, _} = bin_to_cstring(Bin0, 65),
+    {MessageId, _} = bin_to_cstring(Bin0, 65),
 
-	#deliver_sm_resp {message_id=MessageId}.
+    #deliver_sm_resp {message_id=MessageId}.

@@ -9,19 +9,18 @@
 -spec pack(outbind()) -> binary().
 -spec unpack(binary()) -> outbind().
 
-pack(#outbind{system_id=SystemId, 
-		password=Password}) ->
+pack(#outbind{system_id=SystemId,
+        password=Password}) ->
 
-		L = [cstring_to_bin(SystemId, 16),
-					   cstring_to_bin(Password, 9)],
+        L = [cstring_to_bin(SystemId, 16),
+                       cstring_to_bin(Password, 9)],
 
-		list_to_binary(L).
+        list_to_binary(L).
 
 
 unpack(Bin0) ->
-	{SystemId, Bin1} = bin_to_cstring(Bin0, 16),
-	{Password, _} = bin_to_cstring(Bin1, 9),
+    {SystemId, Bin1} = bin_to_cstring(Bin0, 16),
+    {Password, _} = bin_to_cstring(Bin1, 9),
 
-	#outbind {system_id=SystemId,
-		password=Password}.
-
+    #outbind {system_id=SystemId,
+        password=Password}.

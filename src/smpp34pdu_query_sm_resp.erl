@@ -9,27 +9,26 @@
 -spec pack(query_sm_resp()) -> binary().
 -spec unpack(binary()) -> query_sm_resp().
 
-pack(#query_sm_resp{message_id=MessageId, 
-		final_date=FinalDate,
-		message_state=MessageState,
-		error_code=ErrCode}) ->
+pack(#query_sm_resp{message_id=MessageId,
+        final_date=FinalDate,
+        message_state=MessageState,
+        error_code=ErrCode}) ->
 
-		L = [cstring_to_bin(MessageId, 65),
-					   cstring_to_bin(FinalDate, 17),
-					   integer_to_bin(MessageState, 1),
-					   integer_to_bin(ErrCode, 1)],
+        L = [cstring_to_bin(MessageId, 65),
+                       cstring_to_bin(FinalDate, 17),
+                       integer_to_bin(MessageState, 1),
+                       integer_to_bin(ErrCode, 1)],
 
-		list_to_binary(L).
+        list_to_binary(L).
 
 
 unpack(Bin0) ->
-	{MessageId, Bin1} = bin_to_cstring(Bin0, 65),
-	{FinalDate, Bin2} = bin_to_cstring(Bin1, 17),
-	{MessageState, Bin3} = bin_to_integer(Bin2, 1),
-	{ErrCode, _} = bin_to_integer(Bin3, 1),
+    {MessageId, Bin1} = bin_to_cstring(Bin0, 65),
+    {FinalDate, Bin2} = bin_to_cstring(Bin1, 17),
+    {MessageState, Bin3} = bin_to_integer(Bin2, 1),
+    {ErrCode, _} = bin_to_integer(Bin3, 1),
 
-	#query_sm_resp {message_id=MessageId,
-		final_date=FinalDate,
-		message_state=MessageState,
-		error_code=ErrCode}.
-
+    #query_sm_resp {message_id=MessageId,
+        final_date=FinalDate,
+        message_state=MessageState,
+        error_code=ErrCode}.
