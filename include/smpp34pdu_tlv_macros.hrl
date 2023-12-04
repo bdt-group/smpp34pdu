@@ -13,7 +13,7 @@
             unpack_tlv_fields(Rest, Body#RECORD_NAME{vendor_specific= Vendor#{Unexpected => Val}})
     end).
 -define(TLV_UNPACK_FIELD(RECORD_NAME,RECORD_FIELD,FIELD_TAG), unpack_tlv_fields(<<FIELD_TAG:?TLV_TAG_SIZE, _/binary>>=Bin, Body) ->
-	{Val, Rest} = tlv:unpack(FIELD_TAG, Bin),
+    {Val, Rest} = tlv:unpack(FIELD_TAG, Bin),
     unpack_tlv_fields(Rest, Body#RECORD_NAME{RECORD_FIELD=Val})).
 
 -endif.

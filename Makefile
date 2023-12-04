@@ -1,11 +1,30 @@
-all:
-	@./rebar compile
+REBAR ?= rebar3
+PROJECT := smpp34pdu
 
-tests:
-	@./rebar eunit
+.PHONY: compile clean distclean xref dialyzer dialyze linter lint test
+
+all: compile
+
+compile:
+	@$(REBAR) compile
 
 clean:
-	@./rebar clean
+	@$(REBAR) clean
 
-analyze:
-	@./rebar analyze
+distclean: clean
+	rm -rf _build
+
+xref:
+	@$(REBAR) xref
+
+dialyzer:
+	@$(REBAR) dialyzer
+
+dialyze:
+	@$(REBAR) dialyzer
+
+lint:
+	@$(REBAR) as lint lint
+
+test:
+	@$(REBAR) do eunit, ct

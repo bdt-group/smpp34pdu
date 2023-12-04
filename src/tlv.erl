@@ -8,7 +8,7 @@
 -export([unpack_int/2, unpack_cstring/2, unpack_octstring/2]).
 
 -type(valid_values() :: integer()
-                      |	iolist()
+                      |   iolist()
                       |   binary()
                       |   undefined).
 
